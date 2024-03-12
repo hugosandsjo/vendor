@@ -18,7 +18,7 @@ public class Cart
         Products.AddRange(products);
     }
 
-    public decimal GetTotal()
+    public int GetTotal()
     {
         return Products.Sum(product => product.Price);
     }
