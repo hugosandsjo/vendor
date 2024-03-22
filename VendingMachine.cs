@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using Vending_machine;
+﻿using Vending_machine;
+using System.Text.RegularExpressions;
 
 var drinks = new Category("Drinks");
 var snacks = new Category("Snacks");
@@ -28,7 +28,21 @@ Console.WriteLine("Welcome to Gulp Puff, your local vending machine");
 Console.WriteLine();
 Console.WriteLine("First of all, what is your name?");
 
-var name = FirstCharToUpper(Console.ReadLine()) ;
+string name;
+bool validName = false;
+do
+{
+    name = FirstCharToUpper(Console.ReadLine());
+    
+    if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+    {
+        validName = true;
+    }
+    else
+    {
+        Console.WriteLine("That's not a valid name, please try again");
+    }
+} while (!validName);
 
 int age;
 bool validAge = false;
@@ -56,7 +70,7 @@ Console.WriteLine($"{customer.Name}, {customer.Age}");
 Console.WriteLine($"Perfect {customer.Name}! You start with {customer.Balance} dollars.");
 printCommands();
 
-// Run program
+// Run program 
 while (true)
 {
     // Console.WriteLine("--- type MENU for options ---");
@@ -219,6 +233,7 @@ while (true)
         else
         {
             Console.WriteLine("That's not a valid category, please try again:");
+            printCommands();
          
         } 
     }
@@ -278,7 +293,8 @@ while (true)
             Console.WriteLine("Okay, keep on shopping");
         }
         
-        printCommands();
+        Console.WriteLine("Sorry whats that?");
+        continue;
     }
 
     if (command == "EXIT" || command == "5")
@@ -351,6 +367,7 @@ void printCart()
     }
     Console.WriteLine($"TOTAL: {cart.GetTotal()}");
     Console.WriteLine($"BALANCE: {customer.Balance}");
+    Console.WriteLine("-----------------------------");
 }
 
 
