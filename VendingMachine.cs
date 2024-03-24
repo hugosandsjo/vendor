@@ -24,12 +24,13 @@ cigarettes.AddProduct(blend, camel, luckystrike);
 //Start the program
 
 Console.WriteLine();
-Console.WriteLine("Welcome to Gulp Puff, your local vending machine");
+Console.WriteLine("Welcome to Gulp Puff, your local vending machine.");
 Console.WriteLine();
 Console.WriteLine("First of all, what is your name?");
 
 string name;
 bool validName = false;
+
 do
 {
     name = FirstCharToUpper(Console.ReadLine());
@@ -66,6 +67,7 @@ do
 Customer customer = new Customer(name, age);
 Cart cart = new Cart();
 bool adult = customer.Age >= 18;
+
 Console.WriteLine($"{customer.Name}, {customer.Age}");
 Console.WriteLine($"Perfect {customer.Name}! You start with {customer.Balance} dollars.");
 printCommands();
@@ -73,8 +75,6 @@ printCommands();
 // Run program 
 while (true)
 {
-    // Console.WriteLine("--- type MENU for options ---");
-    
     var command = Console.ReadLine().ToUpper();
     
     bool commandHandled = false;
@@ -279,18 +279,18 @@ while (true)
             Console.WriteLine("Not enough money!");
             printCommands();
             continue;
-            
         } 
         
         if (answer == "YES" && cart.GetTotal() <= customer.Balance)
         {
             customer.Checkout(cart);
-            Console.WriteLine("Success!");
+            continue;
         }
         
         if (answer == "NO")
         {
             Console.WriteLine("Okay, keep on shopping");
+            continue;
         }
         
         Console.WriteLine("Sorry whats that?");
